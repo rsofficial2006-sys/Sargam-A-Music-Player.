@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Spotify Clone</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-brands fa-spotify"></i>
+            <span>Sargam</span>
+        </div>
+
+        <nav>
+            <a class="active">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </a>
+
+            <a>
+                <i class="fa-solid fa-book"></i>
+                Your Library
+            </a>
+        </nav>
+
+        <div class="playlist-title">
+            <span>Your Playlists</span>
+            <button id="createPlaylist">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+
+        <div id="playlistList" class="playlist-list">
+            <p>My Playlist #1</p>
+            <p>Chill Vibes</p>
+            <p>Workout Mix</p>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div class="navigation">
+                <button>
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <button>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="What do you want to play?"
+                >
+            </div>
+
+            <div class="profile">
+                <button>
+                    <i class="fa-solid fa-user"></i>
+                    Rahul
+                </button>
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+        <section class="content">
+
+            <h1>Good Evening</h1>
+
+            <div class="quick-grid">
+
+                <div class="quick-card">
+                    <img src="https://picsum.photos/100?random=10">
+                    <span>Liked Songs</span>
+                    <button onclick="playSong(0)">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                </div>
+
+                <div class="quick-card">
+                    <img src="https://picsum.photos/100?random=11">
+                    <span>Daily Mix</span>
+                    <button onclick="playSong(1)">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                </div>
+
+                <div class="quick-card">
+                    <img src="https://picsum.photos/100?random=12">
+                    <span>Chill Mix</span>
+                    <button onclick="playSong(2)">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                </div>
+
+                <div class="quick-card">
+                    <img src="https://picsum.photos/100?random=13">
+                    <span>Workout</span>
+                    <button onclick="playSong(3)">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="section-header">
+                <h2>Made For You</h2>
+                <span>Show all</span>
+            </div>
+
+            <div class="song-grid" id="songGrid"></div>
+
+
+            <div class="section-header">
+                <h2>Popular Artists</h2>
+                <span>Show all</span>
+            </div>
+
+            <div class="artist-grid">
+
+                <div class="artist">
+                    <img src="https://picsum.photos/200?random=21">
+                    <h3>Arijit Singh</h3>
+                    <p>Artist</p>
+                </div>
+
+                <div class="artist">
+                    <img src="https://picsum.photos/200?random=22">
+                    <h3>The Weeknd</h3>
+                    <p>Artist</p>
+                </div>
+
+                <div class="artist">
+                    <img src="https://picsum.photos/200?random=23">
+                    <h3>Armaan Malik</h3>
+                    <p>Artist</p>
+                </div>
+
+                <div class="artist">
+                    <img src="https://picsum.photos/200?random=24">
+                    <h3>Atif Aslam</h3>
+                    <p>Artist</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- MUSIC PLAYER -->
+
+<footer class="player">
+
+    <div class="now-playing">
+
+        <img id="playerImage"
+             src="https://picsum.photos/80?random=1">
+
+        <div>
+            <h4 id="playerTitle">Select a song</h4>
+            <p id="playerArtist">Artist</p>
+        </div>
+
+        <button id="likeBtn">
+            <i class="fa-regular fa-heart"></i>
+        </button>
+
+    </div>
+
+
+    <div class="player-center">
+
+        <div class="controls">
+
+            <button id="shuffleBtn">
+                <i class="fa-solid fa-shuffle"></i>
+            </button>
+
+            <button id="prevBtn">
+                <i class="fa-solid fa-backward-step"></i>
+            </button>
+
+            <button id="playBtn" class="play-btn">
+                <i class="fa-solid fa-play"></i>
+            </button>
+
+            <button id="nextBtn">
+                <i class="fa-solid fa-forward-step"></i>
+            </button>
+
+            <button id="repeatBtn">
+                <i class="fa-solid fa-repeat"></i>
+            </button>
+
+        </div>
+
+        <div class="progress-container">
+
+            <span id="currentTime">0:00</span>
+
+            <input
+                type="range"
+                id="progress"
+                value="0"
+                min="0"
+                max="100"
+            >
+
+            <span id="duration">0:00</span>
+
+        </div>
+
+    </div>
+
+
+    <div class="volume">
+
+        <i class="fa-solid fa-volume-high"></i>
+
+        <input
+            type="range"
+            id="volume"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.7"
+        >
+
+    </div>
+
+</footer>
+
+
+<audio id="audio"></audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>
